@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Pages VK App</title>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #000;
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #818c99;
+            margin: 20px 0 12px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .page-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .page-link {
+            display: block;
+            padding: 12px 16px;
+            background: #f5f5f5;
+            color: #2d81e0;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid #e1e3e6;
+            transition: background 0.2s;
+        }
+        .page-link:hover {
+            background: #e5e5e5;
+        }
+        .section {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 HTML Pages App</h1>
+        <p style="color: #818c99; margin-bottom: 20px;">Приложение с 10 HTML страницами пользователей</p>
+        
+        <div class="section">
+            <h2>Страницы Иванова</h2>
+            <div class="page-list">
+                <a href="ivanov_page1.html" class="page-link">Страница 1 - Иванов</a>
+                <a href="ivanov_page2.html" class="page-link">Страница 2 - Иванов</a>
+                <a href="ivanov_page3.html" class="page-link">Страница 3 - Иванов</a>
+                <a href="ivanov_page4.html" class="page-link">Страница 4 - Иванов</a>
+                <a href="ivanov_page5.html" class="page-link">Страница 5 - Иванов</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Страницы Петрова</h2>
+            <div class="page-list">
+                <a href="petrov_page1.html" class="page-link">Страница 1 - Петров</a>
+                <a href="petrov_page2.html" class="page-link">Страница 2 - Петров</a>
+                <a href="petrov_page3.html" class="page-link">Страница 3 - Петров</a>
+                <a href="petrov_page4.html" class="page-link">Страница 4 - Петров</a>
+                <a href="petrov_page5.html" class="page-link">Страница 5 - Петров</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация VK Bridge
+        if (typeof vkBridge !== 'undefined') {
+            vkBridge.send('VKWebAppInit');
+        }
+        
+        // Добавляем обработчики для красивого перехода
+        document.querySelectorAll('.page-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = e.target.getAttribute('href');
+                
+                // Показываем анимацию загрузки
+                e.target.style.opacity = '0.7';
+                
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
